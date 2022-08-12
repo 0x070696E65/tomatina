@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Render } from '@nestjs/common';
 import { AppService } from './app.service';
-import { SssBody } from '../shared/types';
+import type { SssBody } from '../shared/types';
 
 @Controller()
 export class AppController {
