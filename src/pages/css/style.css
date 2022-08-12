@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    background: #0b1929;
+    color: #FFF;
+}
+
+#__next {
+    margin: 0 auto;
+    width: 1000px;
+    padding: 50px;
+}
+.blinking{
+	-webkit-animation:blink 1s ease-in-out infinite alternate;
+    -moz-animation:blink 1s ease-in-out infinite alternate;
+    animation:blink 1s ease-in-out infinite alternate;
+}
+@-webkit-keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+@-moz-keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+@keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
