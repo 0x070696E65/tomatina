@@ -13,20 +13,10 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { createMuiTheme } from '@material-ui/core/styles';
 
 type HomeProps = {
   token: SssToken;
 };
-
-const theme = createMuiTheme({
-  palette: {
-    action: {
-      disabledBackground: 'rgba(0, 0, 0, 1)',
-      disabled: 'rgba(0, 0, 0, 1)',
-    },
-  },
-});
 
 const Home: NextPage = (props) => {
   const [message, setMessage] = useState<string>('');
