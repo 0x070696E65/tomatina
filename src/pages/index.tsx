@@ -210,7 +210,7 @@ const Home: NextPage = () => {
             startIcon={<EnhancedEncryptionIcon />}
             onClick={onClickSwitchFlag}
           >
-            SSS認証(トマティーナ当日以外は何も起こらないよ!)
+            SSS認証
           </Button>
           <Card
             className='blinking'
