@@ -14,9 +14,19 @@ import {
 } from 'symbol-sdk';
 import { SssBody } from '../shared/types';
 
+const NODE = 'https://hideyoshi-node.net:3001';
+const repo = new RepositoryFactoryHttp(NODE);
+const listener = repo.createListener();
+const authPubkey =
+  'A39EA1EEA2BF80902ED5B573FC9DEE1EDF53FB6E05099669743DFA3E8233400E';
+const auth = PublicAccount.createFromPublicKey(
+  authPubkey,
+  NetworkType.MAIN_NET,
+);
+
 @Injectable()
 export class AppService {
-  async getSssToken(sssBody: SssBody): Promise<SssToken> {
+  async getSssToken(sssBody: SssBody): Promise<[SssToken, string]> {
     try {
       const NODE = 'https://hideyoshi-node.net:3001';
       const repo = new RepositoryFactoryHttp(NODE);
@@ -50,15 +60,34 @@ export class AppService {
             const signedTx = verifier.sign(resTx, generationHash);
             const result = await txRepo.announce(signedTx).toPromise();
             console.log(result);
-            return json;
+            return [json, signedTx.hash];
           }
         }
-        throw new Error('you do not have the mosaic');
+        throw new Error('あなたはトマトモザイクを持ってないよ！');
       } else {
-        throw new Error('does not match verifierAddress');
+        throw new Error('認証者のアドレスと一致しませんでした');
       }
     } catch (e: any) {
       return e.message;
     }
+  }
+  async watchTransaction(hash: string) {
+    return new Promise(function (resolve, reject) {
+      try {
+        listener
+          .open()
+          .then(() => {
+            listener.newBlock();
+            listener.confirmed(auth.address, hash);
+            resolve('認証が完了しました！');
+          })
+          .catch((e: any) => {
+            reject(e.message);
+          });
+      } catch (e: any) {
+        listener.close();
+        return e.message;
+      }
+    });
   }
 }

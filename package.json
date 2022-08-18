@@ -28,6 +28,7 @@
     "@nestjs/platform-express": "^9.0.0",
     "axios": "^0.27.2",
     "nest-next": "^10.0.0",
+    "net": "^1.0.2",
     "next": "^12.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -35,7 +36,8 @@
     "rimraf": "^3.0.2",
     "rxjs": "^7.5.6",
     "sss-module": "^1.0.4",
-    "symbol-sdk": "2.0.0"
+    "symbol-sdk": "2.0.0",
+    "tls": "^0.0.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",

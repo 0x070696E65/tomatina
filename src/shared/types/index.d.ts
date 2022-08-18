@@ -10,3 +10,7 @@ export type SssBody = {
   publicKey: string;
   authToken: string;
 };
+
+export type Hash = {
+  hash: string;
+};

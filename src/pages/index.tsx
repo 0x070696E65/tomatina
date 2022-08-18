@@ -9,40 +9,95 @@ import EnhancedEncryptionIcon from '@material-ui/icons/EnhancedEncryption';
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import {
+  NetworkType,
+  PublicAccount,
+  RepositoryFactoryHttp,
+  KeyGenerator,
+  UInt64,
+} from 'symbol-sdk';
 
-type HomeProps = {
-  token: SssToken;
-};
+const NODE = 'https://hideyoshi-node.net:3001';
+const repo = new RepositoryFactoryHttp(NODE);
+const restrictionHttp = repo.createRestrictionMosaicRepository();
 
-const Home: NextPage = (props) => {
-  const [message, setMessage] = useState<string>('');
-  const [ninsyo, setNinsyo] = useState<string>('認証準備中');
+const Home: NextPage = () => {
+  const [message, setMessage] = useState<string>('認証準備中');
+  const [ninsyoColor, setNinsyoColor] = useState<string>('white');
+
+  let pkey = '';
+
   const onClickSwitchFlag = async () => {
+    const init = async (): Promise<boolean> => {
+      pkey = getActivePublicKey();
+      const query = {
+        targetAddress: PublicAccount.createFromPublicKey(
+          pkey,
+          NetworkType.MAIN_NET,
+        ).address,
+      };
+      const res = await restrictionHttp.search(query).toPromise();
+      if (res == undefined) return false;
+      if (res.data.length == 0) return false;
+
+      for (let i = 0; i < res.data[0].restrictions.length; i++) {
+        if (
+          res.data[0].restrictions[i].key.toHex() ==
+            KeyGenerator.generateUInt64Key('TOMATO').toHex() &&
+          res.data[0].restrictions[i].restrictionValue.toHex() ==
+            UInt64.fromUint(1).toHex()
+        ) {
+          return true;
+        }
+      }
+      return false;
+    };
+
+    const checkMosaic = await init();
+    if (checkMosaic) {
+      setMessage('すでに認証されています');
+      return;
+    }
+
     const customPayload = {
       deadline: 60 * 60 * 24,
     };
-    const pubkey = getActivePublicKey();
-    const reciepientPubkey =
+    const authPubkey =
       'A39EA1EEA2BF80902ED5B573FC9DEE1EDF53FB6E05099669743DFA3E8233400E';
 
-    getActiveAccountToken(reciepientPubkey, customPayload).then(async function (
+    getActiveAccountToken(authPubkey, customPayload).then(async function (
       token,
     ) {
       try {
         const data: SssBody = {
           authToken: token,
-          publicKey: pubkey,
+          publicKey: pkey,
         };
-        const response = await apiClient.post<SssToken>('/api/sss-token', data);
-        console.log(typeof response.data);
+        const response = await apiClient.post<[SssToken, string]>(
+          '/api/sss-token',
+          data,
+        );
         if (typeof response.data == 'string') {
+          setNinsyoColor('red');
           setMessage(response.data);
+        } else {
+          setNinsyoColor('blue');
+          setMessage('認証中');
+
+          const hash: string = response.data[1];
+          const data = {
+            hash,
+          };
+          const message = await apiClient.post<string>(
+            '/api/watch-transaction',
+            data,
+          );
+          setNinsyoColor('green');
+          setMessage(message.data);
         }
-        console.log(response.data);
       } catch (e: any) {
         console.error(e);
       }
@@ -112,25 +167,6 @@ const Home: NextPage = (props) => {
               <br />
               このtoshi.tomatoはトマティーナでしか配らない希少性の高いモザイクなのでぜひGETしてみてください。
             </Typography>
-            <Card
-              className='blinking'
-              sx={{ width: 500 }}
-              variant='outlined'
-              style={{
-                margin: '50px auto',
-                background: '#0b1929',
-                textAlign: 'center',
-                border: '1px solid rgba(255, 255, 255, 1)',
-                color: 'white',
-                borderRadius: '0',
-              }}
-            >
-              <CardContent>
-                <Typography variant='h5' component='div'>
-                  {ninsyo}
-                </Typography>
-              </CardContent>
-            </Card>
             <Typography
               variant='h5'
               component='div'
@@ -172,13 +208,32 @@ const Home: NextPage = (props) => {
             variant='contained'
             color='secondary'
             startIcon={<EnhancedEncryptionIcon />}
-            //onClick={onClickSwitchFlag}
+            onClick={onClickSwitchFlag}
           >
-            SSS認証(トマティーナ当日以外は何も起こらないよ)
+            SSS認証(トマティーナ当日以外は何も起こらないよ!)
           </Button>
+          <Card
+            className='blinking'
+            sx={{ width: 500 }}
+            variant='outlined'
+            style={{
+              margin: '50px auto',
+              background: '#0b1929',
+              textAlign: 'center',
+              border: '1px solid rgba(255, 255, 255, 1)',
+              borderColor: ninsyoColor,
+              color: ninsyoColor,
+              borderRadius: '0',
+            }}
+          >
+            <CardContent>
+              <Typography variant='h5' component='div'>
+                {message}
+              </Typography>
+            </CardContent>
+          </Card>
         </Box>
       </Box>
-      <div>{message}</div>
     </div>
   );
 };
