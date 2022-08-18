@@ -5,7 +5,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 @Module({
-  imports: [RenderModule.forRootAsync(Next({ dev: true }), { viewsDir: null })],
+  imports: [
+    RenderModule.forRootAsync(Next({ dev: false }), { viewsDir: null }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
