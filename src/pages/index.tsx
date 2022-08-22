@@ -117,6 +117,40 @@ const Home: NextPage = () => {
           }}
         >
           <CardContent>
+          <Typography
+              variant='h5'
+              component='div'
+              style={{ paddingBottom: '16px' }}
+            >
+              はじめに
+            </Typography>
+            <Typography variant='body2' py={3}>
+              本企画では、Symbolのデフォルト機能、グローバルモザイク制限というものを使用しています。
+              <br />
+              <a
+                href='https://github.com/xembook/quick_learning_symbol/blob/main/11_restriction.md#112-%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%90%E3%83%AB%E3%83%A2%E3%82%B6%E3%82%A4%E3%82%AF%E5%88%B6%E9%99%90'
+                target='_blank'
+                style={{ color: '#6be4f9' }}
+              >
+                グローバルモザイク制限について
+              </a>
+              <br />
+              <br />
+              toshi.tomatoはこのグローバルモザイク制限を受けており、誰でも送受信できるモザイクではありません。具体的にはTOMATOというKeyの値が1でなければいけません。これはn以上やm未満、lではない。などの設定を行うことができます。
+              <br />
+              また、このモザイクの生成アカウントが他アカウントの署名無しにトランザクションによって値を付与することができます。今回のケースではSSSでxembook.tomatoの所有が確認できたアカウントに対してTOMATOを1にするトランザクションをアナウンスします。
+              <br />
+              これをうまく活用すれば会員のみが送受信できる限定モザイクや、魔術師レベルが10になった時だけ使用できる魔法をモザイクで表現など、色々なアイデアが考えられると思います。Symbolの活用方法を考えるのは楽しいので、まずは速習Symbolで学習してみてください。
+              <br />
+              <a
+                href='https://github.com/xembook/quick_learning_symbol/'
+                target='_blank'
+                style={{ color: '#6be4f9' }}
+              >
+                速習Symbolはこちら
+              </a><br />
+              それでは早速、グローバルモザイク制限を受けたモザイク[toshi.tomato]を入手して体感してみてください。
+            </Typography>
             <Typography variant='h5' component='div'>
               STEP1: [mosaic] xembook.tomatoを入手してください
             </Typography>
@@ -139,13 +173,15 @@ const Home: NextPage = () => {
                 style={{ color: '#6be4f9' }}
               >
                 https://docs.sss-symbol.com/DevelopperGuide/Encription/
-              </a>
+              </a><br />
             </Typography>
             <Typography variant='h5' component='div'>
               STEP3: Transactionの承認を待つ
             </Typography>
             <Typography variant='body2' py={3}>
-              xembook.tomatoの所有が確認されたらtoshi.tomatoの送受信権利を得るためのトランザクションが送信されます。下部の「承認中」が「承認完了」になるまでお待ち下さい。（だいたい30秒ぐらい）
+              xembook.tomatoの所有が確認されたらtoshi.tomatoの送受信権利を得るためのトランザクションが送信されます。下部の「承認中」が「承認完了」になるまでお待ち下さい。（だいたい30秒ぐらい）<br />
+              <b>※注意事項<br />
+              こちらで承認を受けると<a href='https://twitter.com/ishidad2' target='_blank' style={{ color: '#00ff18'}}>だいさん</a>が作成された<a href='https://ishidad2.github.io/2022-tomatina/' target='_blank' style={{ color: '#00ff18'}}>トマティーナ Monitor</a>にアドレスとtoshi.tomatoの保有数が表示されます。予め了承ください。</b>
             </Typography>
             <Typography variant='h5' component='div'>
               STEP4: toshi.tomatoの入手
@@ -167,38 +203,21 @@ const Home: NextPage = () => {
               <br />
               このtoshi.tomatoはトマティーナでしか配らない希少性の高いモザイクなのでぜひGETしてみてください。
             </Typography>
-            <Typography
-              variant='h5'
-              component='div'
-              style={{ paddingBottom: '16px' }}
-            >
-              何がSymbol的？？
+            <Typography variant='h5' component='div'>
+              STEP5: toshi.tomatoを投げる
             </Typography>
             <Typography variant='body2' py={3}>
-              Symbolのデフォルト機能、グローバルモザイク制限というものを使用しています。
+              無事入手することができたら、今度は同じように認証を受けた人と送受信してみましょう。繰り返しますが認証を受けていなければ送信どころか受信すらできないモザイクです。すでに認証を受けたあなたはこのモザイクを送受信する権利を得ました。同じように送受信権利を獲たアドレスにこのtoshi.tomatoを投げつけてみましょう！<br />
+              なお、以下の<a href='https://twitter.com/ishidad2' target='_blank' style={{ color: '#00ff18'}}>だいさん</a>が作成された<a href='https://ishidad2.github.io/2022-tomatina/' target='_blank' style={{ color: '#00ff18'}}>トマティーナ Monitor</a>には、認証されたアドレス一覧が記載されています。特に保有数がゼロのアドレスを見つけたら率先して投げつけてあげたらありがたいです。<br />
               <br />
-              <a
-                href='https://github.com/xembook/quick_learning_symbol/blob/main/11_restriction.md#112-%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%90%E3%83%AB%E3%83%A2%E3%82%B6%E3%82%A4%E3%82%AF%E5%88%B6%E9%99%90'
-                target='_blank'
-                style={{ color: '#6be4f9' }}
-              >
-                グローバルモザイク制限について
-              </a>
-              <br />
-              <br />
-              toshi.tomatoはこのグローバルモザイク制限を受けており、誰でも送受信できるモザイクではありません。具体的にはTOMATOというKeyの値が1でなければいけません。これはn以上やm未満、lではない。などの設定を行うことができます。
-              <br />
-              また、このモザイクの生成アカウントが他アカウントの署名無しにトランザクションによって値を付与することができます。今回のケースではSSSでxembook.tomatoの所有が確認できたアカウントに対してTOMATOを1にするトランザクションをアナウンスしました。
-              <br />
-              これをうまく活用すれば会員のみが送受信できる限定モザイクや、魔術師レベルが10になった時だけ使用できる魔法をモザイクで表現など、色々なアイデアが考えられると思います。Symbolの活用方法を考えるのは楽しいので、まずは速習Symbolで学習してみてください。
-              <br />
-              <a
-                href='https://github.com/xembook/quick_learning_symbol/'
-                target='_blank'
-                style={{ color: '#6be4f9' }}
-              >
-                速習Symbolはこちら
-              </a>
+              また、本企画はxembookさん主催のxembook.tomatoを投げ合うトマティーナの派生イベントです。本家イベントでも思いっきり投げ合いましょう！
+            </Typography>
+            <Typography variant='h5' component='div'>
+              HINT: 簡単にトマトを投げ合う方法
+            </Typography>
+            <Typography variant='body2' py={3}>
+              以下のGoogle Chrome拡張のNFT-DriveEXをインストールすると、WEB上にアドレスかネームスペースがあればChromeで簡単にモザイクを投げつける事ができます！<br />
+              <a href='https://chrome.google.com/webstore/search/NFTDriveEX?hl=ja' target='_blank' style={{ color: '#6be4f9' }}>https://chrome.google.com/webstore/search/NFTDriveEX?hl=ja</a><br />
             </Typography>
           </CardContent>
         </Card>
