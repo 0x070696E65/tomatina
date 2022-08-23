@@ -181,7 +181,7 @@ const Home: NextPage = () => {
             <Typography variant='body2' py={3}>
               xembook.tomatoの所有が確認されたらtoshi.tomatoの送受信権利を得るためのトランザクションが送信されます。下部の「承認中」が「承認完了」になるまでお待ち下さい。（だいたい30秒ぐらい）<br />
               <b>※注意事項<br />
-              こちらで承認を受けると<a href='https://twitter.com/ishidad2' target='_blank' style={{ color: '#00ff18'}}>だいさん</a>が作成された<a href='https://ishidad2.github.io/2022-tomatina/' target='_blank' style={{ color: '#00ff18'}}>トマティーナ Monitor</a>にアドレスとtoshi.tomatoの保有数が表示されます。予め了承ください。</b>
+              こちらで承認を受けると<a href='https://twitter.com/ishidad2' target='_blank' style={{ color: '#00ff18'}}>だいさん</a>が作成された<a href='https://ishidad2.github.io/2022-tomatina/' target='_blank' style={{ color: '#00ff18'}}>トマティーナ Monitor</a>にtoshi.tomatoの未保有者アドレスが表示されます。予め了承ください。</b>
             </Typography>
             <Typography variant='h5' component='div'>
               STEP4: toshi.tomatoの入手
@@ -208,7 +208,7 @@ const Home: NextPage = () => {
             </Typography>
             <Typography variant='body2' py={3}>
               無事入手することができたら、今度は同じように認証を受けた人と送受信してみましょう。繰り返しますが認証を受けていなければ送信どころか受信すらできないモザイクです。すでに認証を受けたあなたはこのモザイクを送受信する権利を得ました。同じように送受信権利を獲たアドレスにこのtoshi.tomatoを投げつけてみましょう！<br />
-              なお、以下の<a href='https://twitter.com/ishidad2' target='_blank' style={{ color: '#00ff18'}}>だいさん</a>が作成された<a href='https://ishidad2.github.io/2022-tomatina/' target='_blank' style={{ color: '#00ff18'}}>トマティーナ Monitor</a>には、認証されたアドレス一覧が記載されています。特に保有数がゼロのアドレスを見つけたら率先して投げつけてあげたらありがたいです。<br />
+              なお、以下の<a href='https://twitter.com/ishidad2' target='_blank' style={{ color: '#00ff18'}}>だいさん</a>が作成された<a href='https://ishidad2.github.io/2022-tomatina/' target='_blank' style={{ color: '#00ff18'}}>トマティーナ Monitor</a>には、認証され、toshi.tomatoの未保有者アドレス一覧が記載されています。未保有者アドレスを見つけたら率先して投げつけてあげたらありがたいです。<br />
               <br />
               また、本企画はxembookさん主催のxembook.tomatoを投げ合うトマティーナの派生イベントです。本家イベントでも思いっきり投げ合いましょう！
             </Typography>
